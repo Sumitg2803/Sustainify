@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Development Goals - Sustainify</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #2fac66;
+            --primary-dark: #1e7a46;
+            --secondary: #f4a261;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        .btn-donate-nav {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white !important;
+            border-radius: 25px;
+            padding: 8px 24px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-donate-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(47, 172, 102, 0.4);
+        }
+
+        /* Page specific */
+        .page-header {
+            padding: 120px 0 80px;
+            background: linear-gradient(rgba(43, 45, 66, 0.9), rgba(43, 45, 66, 0.9)), url('https://images.unsplash.com/photo-1618477461853-cf6ed80fbfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sdg-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            text-align: center;
+            border-top: 5px solid transparent;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .sdg-card-2 {
+            border-top-color: #dda63a;
+        }
+
+        .sdg-card-11 {
+            border-top-color: #fd9d24;
+        }
+
+        .sdg-card-12 {
+            border-top-color: #bf8b2e;
+        }
+
+        .sdg-img {
+            width: 150px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .sdg-card:hover .sdg-img {
+            transform: scale(1.05);
+        }
+
+        .contribution-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s;
+        }
+
+        .contribution-card:hover {
+            transform: translateX(10px);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e8f5e9;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-box2-heart-fill fs-3"></i> Sustainify
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-4">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="food-list.html">Available Food</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="donate.html" class="btn btn-donate-nav nav-link">Donate Food</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-4">Our Commitment to the Future</h1>
+            <p class="lead opacity-75 max-w-700 mx-auto" style="max-width: 700px">
+                Sustainify aligns proudly with the United Nations Sustainable Development Goals to build a better,
+                greener world.
+            </p>
+        </div>
+    </header>
+
+    <!-- What are SDGs -->
+    <section class="py-5 mt-4">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="section-title">What are the UN SDGs?</h2>
+                    <p class="fs-5 text-muted">
+                        The Sustainable Development Goals (SDGs) are a universal call to action, established by the
+                        United Nations in 2015, to end poverty, protect the planet, and ensure that by 2030 all people
+                        enjoy peace and prosperity.
+                    </p>
+                    <p class="fs-5 text-muted">
+                        There are 17 goals in total, all interconnected. At Sustainify, we believe technology and
+                        community collaboration can directly impact several of these vital objectives.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://static.vecteezy.com/system/resources/previews/005/412/433/non_2x/sustainable-development-goals-logo-template-illustration-free-vector.jpg"
+                        alt="SDG Logo" class="img-fluid" style="max-width: 400px; display: block; margin: 0 auto;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDGs Supported -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-center">Goals We Support</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="sdg-card sdg-card-2">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-02.jpg" alt="Goal 2"
+                            class="sdg-img">
+                        <h4 class="fw-bold">Goal 2: Zero Hunger</h4>
+                        <p class="text-muted mt-3">By redirecting perfectly good food from landfills to the plates of
+                            those who need it, Sustainify aims to end hunger in local communities.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="sdg-card sdg-card-11">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-11.jpg" alt="Goal 11"
+                            class="sdg-img">
+                        <h4 class="fw-bold">Goal 11: Sustainable Cities</h4>
+                        <p class="text-muted mt-3">We foster community solidarity, making urban and local systems more
+                            resilient through responsible resource sharing and coordination.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="sdg-card sdg-card-12">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-12.jpg" alt="Goal 12"
+                            class="sdg-img">
+                        <h4 class="fw-bold">Goal 12: Responsible Consumption</h4>
+                        <p class="text-muted mt-3">We provide a practical solution to halve per capita global food waste
+                            at retail and consumer levels by rescuing surplus production.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Major Contributions -->
+    <section class="py-5 my-4">
+        <div class="container">
+            <h2 class="section-title text-center d-block mb-5">Our Major Contributions</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6">
+                    <div class="contribution-card">
+                        <div class="icon-box"><i class="bi bi-trash3"></i></div>
+                        <div>
+                            <h5 class="fw-bold">Reducing Food Waste</h5>
+                            <p class="text-muted mb-0">Providing an active and rapid network to consume surplus food,
+                                keeping it out of municipal landfills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contribution-card">
+                        <div class="icon-box bg-danger bg-opacity-10 text-danger"><i class="bi bi-people"></i></div>
+                        <div>
+                            <h5 class="fw-bold">Helping Communities</h5>
+                            <p class="text-muted mb-0">Bridging the gap between food abundance and food scarcity within
+                                the same neighborhoods.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contribution-card">
+                        <div class="icon-box bg-success bg-opacity-10 text-success"><i class="bi bi-tree"></i></div>
+                        <div>
+                            <h5 class="fw-bold">Promoting Sustainability</h5>
+                            <p class="text-muted mb-0">Raising awareness about the environmental cost of food production
+                                and the importance of conservation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contribution-card">
+                        <div class="icon-box bg-warning bg-opacity-10 text-warning"><i class="bi bi-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Encouraging Responsible Habits</h5>
+                            <p class="text-muted mb-0">Making it incredibly easy for businesses to adopt a "zero-waste"
+                                approach to their surplus provisions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <h4 class="text-white fw-bold mb-3"><i class="bi bi-box2-heart-fill text-success"></i> Sustainify</h4>
+            <p class="text-white-50 mb-4 max-w-500 mx-auto" style="max-width: 500px">
+                Sustainify – Smart Food Donation Platform<br>
+                Helping reduce food waste and support communities through responsible food sharing.
+            </p>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="index.html">Home</a>
+                <a href="donate.html">Donate Food</a>
+                <a href="food-list.html">Available Food</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="text-white-50 small mb-0">© 2026 Sustainify. SDGS Supported: 2, 11, 12.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPath) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

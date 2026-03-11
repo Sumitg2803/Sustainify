@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Food - Sustainify</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #2fac66;
+            --primary-dark: #1e7a46;
+            --secondary: #f4a261;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        .btn-donate-nav {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white !important;
+            border-radius: 25px;
+            padding: 8px 24px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-donate-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(47, 172, 102, 0.4);
+        }
+
+        /* Page specific */
+        .page-header {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+
+        .form-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-top: -40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(47, 172, 102, 0.25);
+        }
+
+        .image-col {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .image-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+        }
+
+        .image-col-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-box2-heart-fill fs-3"></i> Sustainify
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-4">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="food-list.html">Available Food</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="donate.html" class="btn btn-donate-nav nav-link active">Donate Food</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-4">Donate Food</h1>
+            <p class="lead opacity-75">Share your excess food and make an impact today.</p>
+        </div>
+    </header>
+
+    <!-- Donation Section -->
+    <section class="container mb-5 pb-5">
+        <div class="form-card">
+            <div class="row g-5">
+                <!-- Left Column (Image) -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="image-col h-100">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Giving food">
+                        <div class="image-col-overlay">
+                            <h3 class="fw-bold text-white">Every detail matters.</h3>
+                            <p class="mb-0 text-white-50">Accurate descriptions help organizations claim food quickly
+                                and safely before it expires.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column (Form) -->
+                <div class="col-lg-7">
+                    <h3 class="fw-bold mb-4">Donation Details</h3>
+                    <form id="donationForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Donor Name *</label>
+                                <input type="text" class="form-control" id="donorName" required placeholder="John Doe">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone" required placeholder="123-456-7890">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Food Name *</label>
+                                <input type="text" class="form-control" id="foodName" required
+                                    placeholder="e.g. Mixed Veg Curry and Rice">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Food Type *</label>
+                                <select class="form-select" id="foodType" required>
+                                    <option value="" selected disabled>Select type...</option>
+                                    <option value="Veg">Veg</option>
+                                    <option value="Non-Veg">Non-Veg</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Quantity *</label>
+                                <input type="text" class="form-control" id="quantity" required
+                                    placeholder="e.g. 20 plates">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Location *</label>
+                                <input type="text" class="form-control" id="location" required
+                                    placeholder="Full pickup address">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Preparation Time *</label>
+                                <input type="datetime-local" class="form-control" id="prepTime" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Expiry Date & Time *</label>
+                                <input type="datetime-local" class="form-control" id="expiryTime" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Upload Food Image (Optional)</label>
+                                <input type="file" class="form-control" id="foodImage" accept="image/*">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Additional Notes</label>
+                                <textarea class="form-control" id="notes" rows="3"
+                                    placeholder="Any specific handling instructions?"></textarea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-donate-nav w-100 py-3 fs-5">Submit
+                                    Donation</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body fs-6">
+                    <i class="bi bi-check-circle-fill me-2"></i> Donation Submitted Successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <h4 class="text-white fw-bold mb-3"><i class="bi bi-box2-heart-fill text-success"></i> Sustainify</h4>
+            <p class="text-white-50 mb-4 max-w-500 mx-auto" style="max-width: 500px">
+                Sustainify – Smart Food Donation Platform<br>
+                Helping reduce food waste and support communities through responsible food sharing.
+            </p>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="index.html">Home</a>
+                <a href="food-list.html">Available Food</a>
+                <a href="sdg.html">SDGs</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="text-white-50 small mb-0">© 2026 Sustainify. SDGS Supported: 2, 11, 12.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set nav active
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPath) link.classList.add('active');
+            });
+
+            // Form Submit Logic
+            const form = document.getElementById('donationForm');
+            const toastEl = document.getElementById('successToast');
+            const toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+
+            // Set minimum datetime for preparation and expiry to "now"
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            const nowStr = now.toISOString().slice(0, 16);
+            document.getElementById('prepTime').max = nowStr; // Can't prepare in future
+
+            const later = new Date();
+            later.setMinutes(later.getMinutes() - later.getTimezoneOffset());
+            const laterStr = later.toISOString().slice(0, 16);
+            document.getElementById('expiryTime').min = laterStr; // Expiry must be future
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // 1. Capture Data
+                const foodImageInput = document.getElementById('foodImage');
+                // Use a default placeholder if no image file provided, otherwise use an object URL
+                let imageSrc = 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';
+                if (foodImageInput.files && foodImageInput.files[0]) {
+                    // For a real app, this would be uploaded. For localStorage demo, we can just use a placeholder text or object URL
+                    // Object URLs don't persist well in localStorage across sessions, so we will use a generic default if they upload
+                    // To simulate it nicely without breaking persistence, we just use a reliable image link for demonstration
+                    imageSrc = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';
+                }
+
+                const donationItem = {
+                    id: Date.now().toString(),
+                    donorName: document.getElementById('donorName').value,
+                    phone: document.getElementById('phone').value,
+                    foodName: document.getElementById('foodName').value,
+                    foodType: document.getElementById('foodType').value,
+                    quantity: document.getElementById('quantity').value,
+                    location: document.getElementById('location').value,
+                    prepTime: document.getElementById('prepTime').value,
+                    expiryTime: document.getElementById('expiryTime').value,
+                    notes: document.getElementById('notes').value,
+                    image: imageSrc,
+                    createdAt: new Date().toISOString()
+                };
+
+                // 2. Save into localStorage
+                let existingDonations = JSON.parse(localStorage.getItem('sustainifyDonations')) || [];
+                existingDonations.push(donationItem);
+                localStorage.setItem('sustainifyDonations', JSON.stringify(existingDonations));
+
+                // 3. Show Toast Feedback
+                toast.show();
+
+                // 4. Redirect after toast shows
+                setTimeout(() => {
+                    window.location.href = 'food-list.html';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+
+</html>

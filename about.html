@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Sustainify</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #2fac66;
+            --primary-dark: #1e7a46;
+            --secondary: #f4a261;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        .btn-donate-nav {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white !important;
+            border-radius: 25px;
+            padding: 8px 24px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-donate-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(47, 172, 102, 0.4);
+        }
+
+        /* Page specific */
+        .page-header {
+            background: linear-gradient(135deg, var(--dark), #1a1b26);
+            padding: 120px 0 60px;
+            color: white;
+            text-align: center;
+        }
+
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(47, 172, 102, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .academic-badge {
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            background: #e9ecef;
+            color: var(--dark);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* rounded images with shadow */
+        .about-image {
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-box2-heart-fill fs-3"></i> Sustainify
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-4">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="food-list.html">Available Food</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="donate.html" class="btn btn-donate-nav nav-link">Donate Food</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-4">About Sustainify</h1>
+            <p class="lead opacity-75 max-w-700 mx-auto" style="max-width: 700px">
+                Learn more about our mission, vision, and the team driving this initiative forward.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="py-5 my-4">
+        <div class="container">
+            <!-- About Sustainify -->
+            <div class="row align-items-center g-5 mb-5 pb-5 border-bottom">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Who Are We?</h2>
+                    <p class="fs-5 text-muted">
+                        Sustainify is a modern, smart, and responsive food donation platform. Our primary goal is to
+                        foster a culture of food sharing where surplus is redirected to where it is needed most.
+                    </p>
+                    <p class="fs-5 text-muted">
+                        We work locally to ensure that transportation is simple and immediate, creating a network of
+                        donors, volunteers, and NGOs that seamlessly interact to prevent food spoilage and support
+                        vulnerable communities.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Team effort" class="about-image" style="height: 400px;">
+                </div>
+            </div>
+
+            <!-- Why This Platform Matters -->
+            <div class="row align-items-center g-5 mb-5 pb-5 border-bottom flex-lg-row-reverse">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Why It Matters</h2>
+                    <p class="fs-5 text-muted">
+                        Every day, staggering amounts of freshly prepared food by restaurants, households, and event
+                        organizers are thrown away simply because there is no immediate channel to redistribute it.
+                    </p>
+                    <p class="fs-5 text-muted">
+                        This platform matters because it removes the friction from food donation. It uses technology to
+                        bridge the critical time-gap between when food becomes "surplus" and when it becomes "waste".
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Fresh food" class="about-image" style="height: 400px;">
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="mb-5 pb-5 border-bottom">
+                <h2 class="section-title text-center d-block mb-5">Key Platform Features</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="bi bi-clock-history"></i></div>
+                            <h4 class="fw-bold">Real-time Expiry Tracking</h4>
+                            <p class="text-muted">Dynamic countdown timers ensure that users are immediately aware of
+                                the freshness status of available donations.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="bi bi-funnel"></i></div>
+                            <h4 class="fw-bold">Smart Filtering</h4>
+                            <p class="text-muted">Effortlessly browse available donations based on dietary preferences
+                                such as Vegetarian or Non-Vegetarian.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="bi bi-display"></i></div>
+                            <h4 class="fw-bold">Fully Responsive UI</h4>
+                            <p class="text-muted">Accessible on any device – mobile, tablet, or desktop – to ensure you
+                                can donate or claim food on the go.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Context -->
+            <div class="row align-items-center g-5 text-center px-lg-5">
+                <div class="col-12">
+                    <div class="academic-badge shadow-sm">
+                        <i class="bi bi-mortarboard-fill text-primary"></i> Academic Project
+                    </div>
+                    <h2 class="fw-bold mb-4">About the Project</h2>
+                    <p class="fs-5 text-muted mx-auto" style="max-width: 800px;">
+                        This platform was developed as part of an academic requirement to showcase how web technologies
+                        (HTML, CSS, JavaScript, and Bootstrap) can be utilized to solve real-world problems. The
+                        application runs entirely on the client-side utilizing modern browser APIs to simulate a
+                        full-stack experience without a backend.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <h4 class="text-white fw-bold mb-3"><i class="bi bi-box2-heart-fill text-success"></i> Sustainify</h4>
+            <p class="text-white-50 mb-4 max-w-500 mx-auto" style="max-width: 500px">
+                Sustainify – Smart Food Donation Platform<br>
+                Helping reduce food waste and support communities through responsible food sharing.
+            </p>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="index.html">Home</a>
+                <a href="donate.html">Donate Food</a>
+                <a href="food-list.html">Available Food</a>
+                <a href="sdg.html">SDGs</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="text-white-50 small mb-0">© 2026 Sustainify. SDGS Supported: 2, 11, 12.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPath) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
