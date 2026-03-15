@@ -5,269 +5,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Sustainify</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
-        :root {
-            --primary: #2fac66;
-            --primary-dark: #1e7a46;
-            --secondary: #f4a261;
-            --dark: #2b2d42;
-            --light: #f8f9fa;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Navbar */
-        .navbar {
-            backdrop-filter: blur(15px);
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .navbar-brand {
-            font-weight: 800;
-            color: var(--primary) !important;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            color: var(--dark);
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--primary);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .nav-link.active {
-            color: var(--primary) !important;
-        }
-
-        .btn-donate-nav {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white !important;
-            border-radius: 25px;
-            padding: 8px 24px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .btn-donate-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(47, 172, 102, 0.4);
-        }
-
-        /* Page specific */
         .page-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            padding: 120px 0 60px;
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1e3a8a 100%);
             color: white;
             text-align: center;
-        }
-
-        .contact-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            margin-top: -40px;
             position: relative;
-            z-index: 2;
         }
 
-        .contact-info-panel {
-            background: var(--dark);
+        .header-bg-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse-glow 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* Contact Section */
+        .contact-info-card {
+            background: var(--grad-primary);
             color: white;
-            padding: 50px;
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
             height: 100%;
+            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
         }
 
-        .contact-info-panel::before {
+        .contact-info-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            top: -50px; right: -50px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
             border-radius: 50%;
         }
 
-        .info-item {
+        .contact-item {
             display: flex;
             align-items: flex-start;
             gap: 20px;
             margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
         }
 
-        .info-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
+        .contact-icon {
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             flex-shrink: 0;
-            transition: all 0.3s;
         }
 
-        .info-item:hover .info-icon {
-            background: var(--primary);
-            transform: scale(1.1);
-        }
-
+        /* Team Section */
         .team-section {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .team-member {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-form-panel {
-            padding: 50px;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            padding: 12px 15px;
-            border: 1px solid #dee2e6;
-            transition: all 0.3s;
             background: var(--light);
+            padding: 100px 0;
         }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(47, 172, 102, 0.25);
+        .team-card {
             background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-normal);
+            height: 100%;
         }
 
-        .btn-submit {
-            background: var(--primary);
-            color: white;
-            border-radius: 10px;
-            padding: 12px 30px;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.3s;
-            border: none;
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
         }
 
-        .btn-submit:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(47, 172, 102, 0.4);
-        }
-
-        .social-links a {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
+        .team-avatar {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            text-decoration: none;
-            margin-right: 10px;
-            position: relative;
-            z-index: 1;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--light);
+            box-shadow: var(--shadow-sm);
         }
 
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
+        .team-card:hover .team-avatar {
+            border-color: var(--primary);
         }
 
-        /* Footer */
-        .footer {
-            background-color: var(--dark);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 60px 0 20px;
-            margin-top: auto;
-        }
-
-        .footer a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: var(--primary);
+        .map-container {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            height: 400px;
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner-pulse"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="bi bi-box2-heart-fill fs-3"></i> Sustainify
+                <i class="bi bi-heart-fill"></i> Sustainify
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-dark"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto gap-4">
+                <ul class="navbar-nav mx-auto gap-3">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="food-list.html">Available Food</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="donations-list.html">Available Donations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wall-of-kindness.html">Wall of Kindness</a></li>
                     <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
                 </ul>
-                <div class="d-flex">
-                    <a href="donate.html" class="btn btn-donate-nav nav-link">Donate Food</a>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <a href="donate.html" class="btn btn-primary-custom w-100">Donate Now</a>
                 </div>
             </div>
         </div>
@@ -275,166 +158,258 @@
 
     <!-- Header -->
     <header class="page-header">
-        <div class="container">
-            <h1 class="fw-bold display-4">Get in Touch</h1>
-            <p class="lead opacity-75 max-w-700 mx-auto" style="max-width: 700px">
-                Have questions, suggestions, or want to partner with us? We'd love to hear from you.
+        <div class="header-bg-glow"></div>
+        <div class="container position-relative z-1">
+            <h1 class="display-4 fw-bold reveal-up">Get in <span class="text-gradient">Touch</span></h1>
+            <p class="fs-5 opacity-75 max-w-700 mx-auto mt-3 reveal-up" style="max-width: 700px; transition-delay: 0.1s;">
+                We'd love to hear from you. Whether you have a question about donating, partnering, or volunteering, our team is ready to answer.
             </p>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <section class="container mb-5 pb-5">
-        <div class="contact-card">
-            <div class="row g-0">
-                <!-- Left: Info Panel -->
-                <div class="col-lg-5">
-                    <div class="contact-info-panel">
-                        <h3 class="fw-bold mb-5">Contact Information</h3>
-
-                        <div class="info-item">
-                            <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
-                            <div>
-                                <h5 class="fw-bold mb-1">Our Location</h5>
-                                <p class="mb-0 text-white-50">123 College Campus Rd,<br>Innovation Block, Pune 411038
-                                </p>
-                            </div>
+    <!-- Contact Block -->
+    <section class="container py-5 mt-4 mb-5">
+        <div class="row g-0 rounded-5 overflow-hidden shadow-lg reveal-up" style="background: white; border: 1px solid var(--light-muted);">
+            <!-- Contact Info Sidebar -->
+            <div class="col-lg-5 p-2">
+                <div class="contact-info-card">
+                    <h3 class="fw-bold mb-4 pb-2 border-bottom border-light border-opacity-25">Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Our Location</h5>
+                            <p class="opacity-75 mb-0">123 Impact Avenue, Silicon Valley<br>CA 94025, United States</p>
                         </div>
+                    </div>
 
-                        <div class="info-item">
-                            <div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
-                            <div>
-                                <h5 class="fw-bold mb-1">Phone Number</h5>
-                                <p class="mb-0 text-white-50">+91 98765 43210<br>+91 12345 67890</p>
-                            </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-telephone"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Phone Number</h5>
+                            <p class="opacity-75 mb-0">+1 (555) 123-4567<br>Mon-Fri 9am-6pm PST</p>
                         </div>
+                    </div>
 
-                        <div class="info-item">
-                            <div class="info-icon"><i class="bi bi-envelope-fill"></i></div>
-                            <div>
-                                <h5 class="fw-bold mb-1">Email Address</h5>
-                                <p class="mb-0 text-white-50">hello@sustainify.edu<br>support@sustainify.edu</p>
-                            </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Email Address</h5>
+                            <p class="opacity-75 mb-0">hello@sustainify.org<br>support@sustainify.org</p>
                         </div>
+                    </div>
 
-                        <div class="team-section">
-                            <h5 class="fw-bold mb-3">Project Team Members</h5>
-                            <div class="team-member">
-                                <i class="bi bi-person-circle fs-4 text-primary"></i> Team Member 1 (Lead Dev)
-                            </div>
-                            <div class="team-member">
-                                <i class="bi bi-person-circle fs-4 text-primary"></i> Team Member 2 (UI/UX)
-                            </div>
-                            <div class="team-member">
-                                <i class="bi bi-person-circle fs-4 text-primary"></i> Team Member 3 (Research)
-                            </div>
-                            <div class="team-member">
-                                <i class="bi bi-person-circle fs-4 text-primary"></i> Team Member 4 (Testing)
-                            </div>
-                            <div class="team-member">
-                                <i class="bi bi-person-circle fs-4 text-primary"></i> Team Member 5 (Management)
-                            </div>
+                    <div class="mt-5 pt-3">
+                        <h5 class="fw-bold mb-3">Follow Us</h5>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-light rounded-circle text-primary" style="width:40px;height:40px;padding:0;line-height:40px;"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" class="btn btn-light rounded-circle text-primary" style="width:40px;height:40px;padding:0;line-height:40px;"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="btn btn-light rounded-circle text-primary" style="width:40px;height:40px;padding:0;line-height:40px;"><i class="bi bi-instagram"></i></a>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="social-links mt-5">
-                            <a href="#"><i class="bi bi-twitter-x"></i></a>
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                            <a href="#"><i class="bi bi-github"></i></a>
+            <!-- Contact Form -->
+            <div class="col-lg-7 p-5">
+                <h3 class="fw-bold mb-4 text-dark">Send us a Message</h3>
+                <form id="contactForm">
+                    <div class="row g-4">
+                        <div class="col-md-6 form-floating-custom mb-0">
+                            <input type="text" class="form-control-custom" id="cName" required placeholder="Your Name">
+                            <label class="px-2 bg-white text-muted" style="position: absolute; top: -10px; left: 15px; font-size: 0.85rem;">Your Name</label>
+                        </div>
+                        <div class="col-md-6 form-floating-custom mb-0">
+                            <input type="email" class="form-control-custom" id="cEmail" required placeholder="Email Address">
+                            <label class="px-2 bg-white text-muted" style="position: absolute; top: -10px; left: 15px; font-size: 0.85rem;">Email Address</label>
+                        </div>
+                        <div class="col-12 form-floating-custom mb-0">
+                            <input type="text" class="form-control-custom" id="cSubject" required placeholder="Subject">
+                            <label class="px-2 bg-white text-muted" style="position: absolute; top: -10px; left: 15px; font-size: 0.85rem;">Subject</label>
+                        </div>
+                        <div class="col-12 form-floating-custom mb-0">
+                            <textarea class="form-control-custom" id="cMessage" rows="5" required placeholder="Your Message"></textarea>
+                            <label class="px-2 bg-white text-muted" style="position: absolute; top: -10px; left: 15px; font-size: 0.85rem;">Your Message</label>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-primary-custom py-3 px-5 w-100 fs-5">
+                                Send Message <i class="bi bi-send ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Response Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+        <div id="contactToast" class="toast text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body fs-6">
+                    <i class="bi bi-check-circle-fill me-2 fs-5"></i> Thanks! We have received your message.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="text-center mb-5 reveal-up">
+                <span class="text-uppercase fw-bold text-primary mb-2 d-block tracking-wider">Our People</span>
+                <h2 class="display-5 fw-bold mb-3">Meet The <span class="text-gradient">Team</span></h2>
+                <p class="fs-5 text-muted max-w-700 mx-auto" style="max-width: 700px;">
+                    We are a group of five passionate individuals dedicated to building technology for social good.
+                </p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4 col-xl-2" style="width: 20%; min-width: 250px;">
+                    <div class="team-card reveal-up" style="transition-delay: 0.1s;">
+                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Member" class="team-avatar">
+                        <h5 class="fw-bold text-dark mb-1">Alex John</h5>
+                        <p class="text-primary fw-medium mb-3">Lead Developer</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="#" class="text-muted"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-muted"><i class="bi bi-github fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 col-xl-2" style="width: 20%; min-width: 250px;">
+                    <div class="team-card reveal-up" style="transition-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Member" class="team-avatar">
+                        <h5 class="fw-bold text-dark mb-1">Sarah Lee</h5>
+                        <p class="text-primary fw-medium mb-3">UI/UX Designer</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="#" class="text-muted"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-muted"><i class="bi bi-github fs-5"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Contact Form -->
-                <div class="col-lg-7">
-                    <div class="contact-form-panel">
-                        <h3 class="fw-bold mb-4">Send us a Message</h3>
-                        <p class="text-muted mb-4">Fill out the form below and we will get back to you as soon as
-                            possible.</p>
+                <div class="col-md-6 col-lg-4 col-xl-2" style="width: 20%; min-width: 250px;">
+                    <div class="team-card reveal-up" style="transition-delay: 0.3s;">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Member" class="team-avatar">
+                        <h5 class="fw-bold text-dark mb-1">David Kim</h5>
+                        <p class="text-primary fw-medium mb-3">Frontend Engineer</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="#" class="text-muted"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-muted"><i class="bi bi-github fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
 
-                        <form id="contactForm">
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Your Name</label>
-                                    <input type="text" class="form-control" required placeholder="John Doe">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Your Email</label>
-                                    <input type="email" class="form-control" required placeholder="john@example.com">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Subject</label>
-                                    <input type="text" class="form-control" required placeholder="How can we help you?">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Message</label>
-                                    <textarea class="form-control" rows="5" required
-                                        placeholder="Type your message here..."></textarea>
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <button type="submit" class="btn btn-submit">Send Message</button>
-                                </div>
-                            </div>
-                        </form>
+                <div class="col-md-6 col-lg-4 col-xl-2" style="width: 20%; min-width: 250px;">
+                    <div class="team-card reveal-up" style="transition-delay: 0.4s;">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Member" class="team-avatar">
+                        <h5 class="fw-bold text-dark mb-1">Mia Chen</h5>
+                        <p class="text-primary fw-medium mb-3">Backend Engineer</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="#" class="text-muted"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-muted"><i class="bi bi-github fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-xl-2" style="width: 20%; min-width: 250px;">
+                    <div class="team-card reveal-up" style="transition-delay: 0.5s;">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Member" class="team-avatar">
+                        <h5 class="fw-bold text-dark mb-1">Chris Davis</h5>
+                        <p class="text-primary fw-medium mb-3">Project Manager</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="#" class="text-muted"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-muted"><i class="bi bi-github fs-5"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Toast Notification -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="contactToast" class="toast align-items-center text-bg-success border-0" role="alert"
-            aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body fs-6">
-                    <i class="bi bi-check-circle-fill me-2"></i> Message sent successfully! We'll be in touch.
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container text-center">
-            <h4 class="text-white fw-bold mb-3"><i class="bi bi-box2-heart-fill text-success"></i> Sustainify</h4>
-            <p class="text-white-50 mb-4 max-w-500 mx-auto" style="max-width: 500px">
-                Sustainify – Smart Food Donation Platform<br>
-                Helping reduce food waste and support communities through responsible food sharing.
-            </p>
-            <div class="d-flex justify-content-center gap-4 mb-4">
-                <a href="index.html">Home</a>
-                <a href="donate.html">Donate Food</a>
-                <a href="food-list.html">Available Food</a>
-                <a href="sdg.html">SDGs</a>
-                <a href="about.html">About</a>
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <a href="index.html" class="navbar-brand text-white footer-brand mb-3">
+                        <i class="bi bi-heart-fill"></i> Sustainify
+                    </a>
+                    <p class="mt-4 pe-lg-4">
+                        A modern social impact platform dedicated to bridging the gap between excess resources and community needs. Donate today, change a life tomorrow.
+                    </p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="social-circle"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="donations-list.html">Available Items</a></li>
+                        <li><a href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sdg.html">Our Impact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white fw-bold mb-4">SDG Alignment</h5>
+                    <p>We actively support the UN Sustainable Development Goals.</p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-primary">SDG 1</span>
+                        <span class="badge bg-danger">SDG 4</span>
+                        <span class="badge bg-warning text-dark">SDG 10</span>
+                        <span class="badge bg-success">SDG 12</span>
+                    </div>
+                </div>
             </div>
-            <p class="text-white-50 small mb-0">© 2026 Sustainify. SDGS Supported: 2, 11, 12.</p>
+            
+            <div class="pt-4 border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+                <div class="text-center">
+                    <p class="mb-0">© 2026 Sustainify. Built for the community, by the community.</p>
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Main JS -->
+    <script src="assets/js/main.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.getAttribute('href') === currentPath) link.classList.add('active');
-            });
-
-            // Form Submit Logic for visually pleasing UX
             const form = document.getElementById('contactForm');
-            const toastEl = document.getElementById('contactToast');
-            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                toast.show();
-                form.reset();
+            const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            const toastList = toastElList.map(function (toastEl) {
+              return new bootstrap.Toast(toastEl, {delay: 3000})
             });
+
+            if(form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if(toastList.length > 0) {
+                        toastList[0].show();
+                    }
+                    form.reset();
+                });
+            }
         });
     </script>
 </body>
-
 </html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall of Kindness - Sustainify</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .page-header {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, var(--dark) 0%, #052e16 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-bg-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--light-muted);
+        }
+
+        .section-badge {
+            background: var(--grad-primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Horizontal Scrolling Container */
+        .scrolling-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 24px;
+            padding-bottom: 20px; /* Space for scrollbar */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            /* Hide scrollbar by default, show on hover */
+            scrollbar-width: none;
+        }
+
+        .scrolling-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+
+
+        /* Contributor Card */
+        .card-wrapper {
+            flex: 0 0 auto;
+            width: 320px; /* Fixed width for horizontal scrolling */
+            max-width: 85vw; /* Responsive on small screens */
+        }
+
+        .contributor-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            border: 1px solid rgba(0,0,0,0.05);
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contributor-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: var(--border-radius-lg);
+            background: var(--grad-glass);
+            opacity: 0;
+            z-index: -1;
+            transition: var(--transition-normal);
+        }
+
+        .contributor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .contributor-card:hover::before {
+            opacity: 1;
+        }
+
+        .contributor-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--light);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-normal);
+        }
+
+        .contributor-card:hover .contributor-img {
+            transform: scale(1.1);
+            border-color: var(--primary-light);
+        }
+
+        .contributor-name {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .contributor-role {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .donation-info {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: left;
+        }
+
+        .donation-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--dark-muted);
+            margin-bottom: 5px;
+        }
+
+        .donation-info i {
+            width: 20px;
+            color: var(--secondary);
+            text-align: center;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner-pulse"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-fill"></i> Sustainify
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="donations-list.html">Available Donations</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <a href="donate.html" class="btn btn-primary-custom w-100">Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="header-bg-glow"></div>
+        <div class="container position-relative z-1">
+            <h1 class="display-4 fw-bold reveal-up">Wall of <span class="text-gradient">Kindness</span></h1>
+            <p class="fs-5 opacity-75 max-w-700 mx-auto mt-3 reveal-up" style="max-width: 700px; transition-delay: 0.1s;">
+                Honoring the generous individuals and organizations who are actively shaping a better, sustainable future for our communities.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="container py-5 my-4 overflow-hidden">
+        
+        <!-- Style Saviors -->
+        <div class="mb-5 pb-4 reveal-up">
+            <div class="section-header">
+                <div class="section-badge" style="background: linear-gradient(135deg, #ec4899, #be185d);">
+                    <i class="bi bi-bag-heart-fill"></i> Style Saviors
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sarah Jenkins" class="contributor-img">
+                        <h4 class="contributor-name">Sarah Jenkins</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Winter Coats</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 15 items</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Downtown Hub</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Michael Chen" class="contributor-img">
+                        <h4 class="contributor-name">Michael Chen</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Children's Shoes</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 8 pairs</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Westside Area</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #ec4899 !important;">
+                            LA
+                        </div>
+                        <h4 class="contributor-name">Local Apparel Inc.</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> T-Shirts & Jeans</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 50+ items</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> City Center</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Ana Lopez" class="contributor-img">
+                        <h4 class="contributor-name">Ana Lopez</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Summer Dresses</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 12 items</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> East Valley</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Knowledge Ninjas -->
+        <div class="mb-5 pb-4 reveal-up">
+            <div class="section-header">
+                <div class="section-badge" style="background: linear-gradient(135deg, #0284c7, #0369a1);">
+                    <i class="bi bi-book-half"></i> Knowledge Ninjas
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #0284c7 !important;">
+                            MH
+                        </div>
+                        <h4 class="contributor-name">Metro High School</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Textbooks</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 120 books</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Metro West</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Emily Rose" class="contributor-img">
+                        <h4 class="contributor-name">Emily Rose</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Novels & Fiction</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 35 books</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> South District</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Toy Titans -->
+        <div class="mb-5 pb-4 reveal-up">
+            <div class="section-header">
+                <div class="section-badge" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+                    <i class="bi bi-puzzle-fill"></i> Toy Titans
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #8b5cf6 !important;">
+                            KP
+                        </div>
+                        <h4 class="contributor-name">KidsPlay Org</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Educational Sets</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 25 sets</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> City Center</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="David & Family" class="contributor-img">
+                        <h4 class="contributor-name">David & Family</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Action Figures</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 1 box</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Pine View</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #8b5cf6 !important;">
+                            TS
+                        </div>
+                        <h4 class="contributor-name">Toy Story Inc.</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Board Games</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 40 boxes</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Industrial Area</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Lily Evans" class="contributor-img">
+                        <h4 class="contributor-name">Lily Evans</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Stuffed Toys</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 15 items</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> South Hills</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Future Builders -->
+        <div class="mb-5 pb-4 reveal-up">
+            <div class="section-header">
+                <div class="section-badge" style="background: linear-gradient(135deg, #10b981, #047857);">
+                    <i class="bi bi-pencil-fill"></i> Future Builders
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Alex River" class="contributor-img">
+                        <h4 class="contributor-name">Alex River</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Backpacks & Pens</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 15 kits</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Northside</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #10b981 !important;">
+                            SS
+                        </div>
+                        <h4 class="contributor-name">Stationery Station</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Notebooks & Pencils</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 500 items</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Downtown</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #10b981 !important;">
+                            EP
+                        </div>
+                        <h4 class="contributor-name">EduPrint Inc.</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Printer Paper</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 50 reams</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> West Valley</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Olivia Chen" class="contributor-img">
+                        <h4 class="contributor-name">Olivia Chen</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Art Supplies</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 25 sets</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> South Hills</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #10b981 !important;">
+                            MS
+                        </div>
+                        <h4 class="contributor-name">Math Supplies Co.</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Calculators</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 40 units</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Industrial Park</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Home Helpers -->
+        <div class="mb-5 pb-4 reveal-up">
+            <div class="section-header">
+                <div class="section-badge" style="background: linear-gradient(135deg, #f59e0b, #b45309);">
+                    <i class="bi bi-house-heart-fill"></i> Home Helpers
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Jessica Lim" class="contributor-img">
+                        <h4 class="contributor-name">Jessica Lim</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Blankets & Pillows</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> 10 pieces</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> East End</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Hope Sponsors -->
+        <div class="mb-5 pb-4 reveal-up">
+            <div class="section-header">
+                <div class="section-badge" style="background: linear-gradient(135deg, #14b8a6, #0f766e);">
+                    <i class="bi bi-piggy-bank-fill"></i> Hope Sponsors
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #14b8a6 !important;">
+                            TG
+                        </div>
+                        <h4 class="contributor-name">TechGenix Corp</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Operations Grant</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> Financial Support</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Global</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #14b8a6 !important;">
+                            FB
+                        </div>
+                        <h4 class="contributor-name">Foundation Bank</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Logistics Grant</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> Core Funding</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> National</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Kevin Williams" class="contributor-img">
+                        <h4 class="contributor-name">Kevin Williams</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Monthly Support</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> Recurring</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Local</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Samantha Wright" class="contributor-img">
+                        <h4 class="contributor-name">Samantha Wright</h4>
+                        <div class="contributor-role">Individual Donor</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> One-time Gift</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> Campaign Fund</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Local</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-wrapper">
+                    <div class="contributor-card">
+                        <div class="contributor-img d-flex align-items-center justify-content-center bg-light fs-1 text-primary fw-bold" style="border-width:2px; color: #14b8a6 !important;">
+                            SV
+                        </div>
+                        <h4 class="contributor-name">Silicon Valley gives</h4>
+                        <div class="contributor-role"><i class="bi bi-building"></i> Organization</div>
+                        <div class="donation-info">
+                            <p><i class="bi bi-box-seam-fill"></i> <strong>Donated:</strong> Tech Grants</p>
+                            <p><i class="bi bi-123"></i> <strong>Quantity:</strong> Hardware/Cash</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Regional</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <a href="index.html" class="navbar-brand text-white footer-brand mb-3">
+                        <i class="bi bi-heart-fill"></i> Sustainify
+                    </a>
+                    <p class="mt-4 pe-lg-4">
+                        A modern social impact platform dedicated to bridging the gap between excess resources and community needs. Donate today, change a life tomorrow.
+                    </p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="social-circle"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="donations-list.html">Available Items</a></li>
+                        <li><a href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sdg.html">Our Impact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white fw-bold mb-4">SDG Alignment</h5>
+                    <p>We actively support the UN Sustainable Development Goals.</p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-primary">SDG 1</span>
+                        <span class="badge bg-danger">SDG 4</span>
+                        <span class="badge bg-warning text-dark">SDG 10</span>
+                        <span class="badge bg-success">SDG 12</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+                <div class="text-center">
+                    <p class="mb-0">© 2026 Sustainify. Built for the community, by the community.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Main JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

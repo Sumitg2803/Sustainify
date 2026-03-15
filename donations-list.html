@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Donations - Sustainify</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .page-header {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1e1b4b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        /* Filter Sidebar */
+        .filter-sidebar {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 100px;
+            border: 1px solid var(--light-muted);
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--light-muted);
+        }
+        
+        .filter-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Custom Radio/Check */
+        .custom-filter-option {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            position: relative;
+            padding-left: 30px;
+            user-select: none;
+            color: var(--dark-muted);
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .custom-filter-option:hover {
+            color: var(--primary);
+        }
+
+        .custom-filter-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 2px; left: 0;
+            height: 20px; width: 20px;
+            background-color: var(--light-muted);
+            border-radius: 6px;
+            transition: var(--transition-fast);
+        }
+
+        .custom-filter-option:hover input ~ .checkmark {
+            background-color: #cbd5e1;
+        }
+
+        .custom-filter-option input:checked ~ .checkmark {
+            background-color: var(--primary);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-filter-option input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .custom-filter-option .checkmark:after {
+            left: 7px; top: 3px;
+            width: 6px; height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Donation Cards */
+        .donation-card {
+            border: none;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            background: white;
+            transition: var(--transition-normal);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--light-muted);
+        }
+
+        .donation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .image-container {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .donation-card:hover .image-container img {
+            transform: scale(1.08);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px; left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .condition-badge {
+            position: absolute;
+            top: 15px; right: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 2;
+            color: white;
+        }
+        .cond-new { background: var(--success); }
+        .cond-used { background: var(--warning); color: #78350f !important;}
+
+        .card-inner-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .meta-list {
+            list-style: none;
+            padding: 0; margin: 0 0 20px 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .meta-list li {
+            font-size: 0.9rem;
+            color: var(--dark-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .meta-list i {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .donor-box {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .donor-avatar {
+            width: 40px; height: 40px;
+            background: var(--grad-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .donor-name {
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner-pulse"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-fill"></i> Sustainify
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+
+                    <li class="nav-item"><a class="nav-link active" href="donations-list.html">Available Donations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <a href="donate.html" class="btn btn-primary-custom w-100">Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold reveal-up">Available <span class="text-gradient">Donations</span></h1>
+            <p class="fs-5 opacity-75 max-w-700 mx-auto mt-3 reveal-up" style="max-width: 700px; transition-delay: 0.1s;">
+                Browse available items donated by generous community members and organizations. Filter by category, condition, size, or search by location.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="container py-5 my-4">
+        <div class="row g-5">
+            <!-- Filter Sidebar -->
+            <div class="col-lg-3 reveal-left">
+                <div class="filter-sidebar">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="fw-bold mb-0">Filters</h4>
+                        <button id="resetFilters" class="btn btn-sm btn-outline-secondary rounded-pill">Reset</button>
+                    </div>
+
+                    <div class="filter-group form-floating-custom mb-3">
+                        <input type="text" class="form-control-custom" id="searchLocation" placeholder="Search Location...">
+                        <label class="px-2 bg-white text-muted" style="position: absolute; top: -10px; left: 15px; font-size: 0.85rem;">Location</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">Category</div>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="All" checked>
+                            <span class="checkmark"></span> All Categories
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="Clothes">
+                            <span class="checkmark"></span> Clothes
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="Books">
+                            <span class="checkmark"></span> Books
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="Toys">
+                            <span class="checkmark"></span> Toys
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="School Supplies">
+                            <span class="checkmark"></span> School Supplies
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="Household Items">
+                            <span class="checkmark"></span> Household Items
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCat" value="Money">
+                            <span class="checkmark"></span> Money
+                        </label>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">Condition</div>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCond" value="All" checked>
+                            <span class="checkmark"></span> All Conditions
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCond" value="New">
+                            <span class="checkmark"></span> New
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterCond" value="Used - Good">
+                            <span class="checkmark"></span> Used - Good
+                        </label>
+                    </div>
+
+                    <div class="filter-group" id="sizeFilterGroup" style="display: none;">
+                        <div class="filter-label">Size (Clothes only)</div>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterSize" value="All" checked>
+                            <span class="checkmark"></span> All Sizes
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterSize" value="S">
+                            <span class="checkmark"></span> Small (S)
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterSize" value="M">
+                            <span class="checkmark"></span> Medium (M)
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterSize" value="L">
+                            <span class="checkmark"></span> Large (L)
+                        </label>
+                        <label class="custom-filter-option">
+                            <input type="radio" name="filterSize" value="XL">
+                            <span class="checkmark"></span> Extra Large (XL)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Donations Grid -->
+            <div class="col-lg-9 reveal-right">
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                    <h5 class="fw-bold mb-0 text-dark" id="resultsCount">Loading items...</h5>
+                </div>
+
+                <div class="row g-4" id="donationsGrid">
+                    <!-- Cards injected by JS -->
+                </div>
+
+                <div id="emptyState" class="text-center py-5 d-none">
+                    <div class="mb-4">
+                        <i class="bi bi-search" style="font-size: 4rem; color: var(--light-muted);"></i>
+                    </div>
+                    <h3 class="fw-bold text-dark">No donations found</h3>
+                    <p class="text-muted fs-5">Try adjusting your filters or search location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 20px; border: none; overflow: hidden;">
+                <div class="modal-header bg-light border-0 p-4">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Contact Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="modalBody">
+                    <!-- Content injected via JS -->
+                </div>
+                <div class="modal-footer border-0 p-4 bg-light">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary-custom" id="modalEmailBtn"><i class="bi bi-envelope-fill me-2"></i>Send Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <a href="index.html" class="navbar-brand text-white footer-brand mb-3">
+                        <i class="bi bi-heart-fill"></i> Sustainify
+                    </a>
+                    <p class="mt-4 pe-lg-4">
+                        A modern social impact platform dedicated to bridging the gap between excess resources and community needs. Donate today, change a life tomorrow.
+                    </p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="social-circle"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="donations-list.html">Available Items</a></li>
+                        <li><a href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sdg.html">Our Impact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white fw-bold mb-4">SDG Alignment</h5>
+                    <p>We actively support the UN Sustainable Development Goals.</p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-primary">SDG 1</span>
+                        <span class="badge bg-danger">SDG 4</span>
+                        <span class="badge bg-warning text-dark">SDG 10</span>
+                        <span class="badge bg-success">SDG 12</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+                <div class="text-center">
+                    <p class="mb-0">© 2026 Sustainify. Built for the community, by the community.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Main JS -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Page Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Initialize Sample Data if V2 is empty
+            const sampleV2Data = [
+                {
+                    id: '101', donorName: 'Sarah Jenkins', isOrganization: false,
+                    category: 'Clothes', condition: 'Used - Good', size: 'M',
+                    itemName: 'Winter Coat Bundle', quantity: '3 items', location: 'Downtown Hub',
+                    phone: '555-0102', email: 'sarah@example.com',
+                    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    datePosted: new Date(Date.now() - 86400000).toISOString()
+                },
+                {
+                    id: '102', donorName: 'Metro High School', isOrganization: true, contactPerson: 'Principal Smith',
+                    category: 'Books', condition: 'Used - Good', size: null,
+                    itemName: 'High School Textbooks Collection', quantity: '45 books', location: 'Metro West',
+                    phone: '555-3001', email: 'admin@metrohigh.edu',
+                    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    datePosted: new Date(Date.now() - 2*86400000).toISOString()
+                },
+                {
+                    id: '103', donorName: 'KidsPlay Foundation', isOrganization: true, contactPerson: 'Mark T.',
+                    category: 'Toys', condition: 'New', size: null,
+                    itemName: 'Puzzles and Board Games', quantity: '10 sets', location: 'City Center',
+                    phone: '555-9002', email: 'hello@kidsplay.org',
+                    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    datePosted: new Date().toISOString()
+                },
+                {
+                    id: '104', donorName: 'Alex River', isOrganization: false,
+                    category: 'School Supplies', condition: 'New', size: null,
+                    itemName: 'Backpacks & Stationery', quantity: '5 kits', location: 'Northside Area',
+                    phone: '555-1102', email: 'alex@example.com',
+                    image: 'https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    datePosted: new Date().toISOString()
+                },
+                {
+                    id: '105', donorName: 'David & Family', isOrganization: false,
+                    category: 'Household Items', condition: 'Used - Good', size: null,
+                    itemName: 'Dining Chair Set', quantity: '4 chairs', location: 'South End',
+                    phone: '555-8833', email: 'david@example.com',
+                    image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    datePosted: new Date(Date.now() - 10000000).toISOString()
+                },
+                {
+                    id: '106', donorName: 'Community Church', isOrganization: true, contactPerson: 'Rev. John',
+                    category: 'Clothes', condition: 'New', size: 'L',
+                    itemName: 'Pack of Sweaters', quantity: '20 items', location: 'East Suburbs',
+                    phone: '555-7766', email: 'church@example.com',
+                    image: 'https://images.unsplash.com/photo-1434389678369-184661138ff9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    datePosted: new Date(Date.now() - 500000).toISOString()
+                }
+            ];
+
+            let rawData = JSON.parse(localStorage.getItem('sustainifyV2_Donations'));
+            if(!rawData || rawData.length === 0) {
+                localStorage.setItem('sustainifyV2_Donations', JSON.stringify(sampleV2Data));
+                rawData = sampleV2Data;
+            }
+
+            // Elements
+            const grid = document.getElementById('donationsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const resultsCount = document.getElementById('resultsCount');
+            const searchLoc = document.getElementById('searchLocation');
+            const filterCatInputs = document.querySelectorAll('input[name="filterCat"]');
+            const filterCondInputs = document.querySelectorAll('input[name="filterCond"]');
+            const filterSizeInputs = document.querySelectorAll('input[name="filterSize"]');
+            const sizeFilterGroup = document.getElementById('sizeFilterGroup');
+            const resetBtn = document.getElementById('resetFilters');
+
+            const contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalEmailBtn = document.getElementById('modalEmailBtn');
+
+            // Formatter
+            window.openContact = (id) => {
+                const item = rawData.find(i => i.id === id);
+                if(!item) return;
+
+                modalTitle.innerText = `Contact: ${item.donorName}`;
+                
+                let html = `
+                    <div class="mb-4 text-center">
+                        <div class="donor-avatar mx-auto mb-3" style="width:70px;height:70px;font-size:2rem;">
+                            ${item.donorName.charAt(0).toUpperCase()}
+                        </div>
+                        <h4 class="fw-bold mb-0">${item.donorName}</h4>
+                        ${item.isOrganization ? `<p class="text-muted"><i class="bi bi-building"></i> Organization | Contact: ${item.contactPerson}</p>` : `<p class="text-muted"><i class="bi bi-person"></i> Individual</p>`}
+                    </div>
+                    
+                    <div class="bg-white rounded-3 border p-3 mb-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-telephone-fill text-primary me-3 fs-4"></i>
+                            <div>
+                                <small class="text-muted d-block">Phone Number</small>
+                                <span class="fw-bold text-dark fs-5">${item.phone}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-3 border p-3">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-envelope-fill text-primary me-3 fs-4"></i>
+                            <div>
+                                <small class="text-muted d-block">Email Address</small>
+                                <span class="fw-bold text-dark fs-5">${item.email}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if(item.address) {
+                    html += `
+                        <div class="bg-white rounded-3 border p-3 mt-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt-fill text-primary me-3 fs-4"></i>
+                                <div>
+                                    <small class="text-muted d-block">Address</small>
+                                    <span class="fw-bold text-dark">${item.address}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                modalBody.innerHTML = html;
+                modalEmailBtn.href = `mailto:${item.email}?subject=Regarding your donation: ${item.itemName} on Sustainify`;
+                
+                contactModal.show();
+            };
+
+            const renderCards = () => {
+                // Get active filters
+                const locSearch = searchLoc.value.toLowerCase().trim();
+                const activeCat = Array.from(filterCatInputs).find(i => i.checked).value;
+                const activeCond = Array.from(filterCondInputs).find(i => i.checked).value;
+                const activeSize = Array.from(filterSizeInputs).find(i => i.checked).value;
+
+                // Show/hide size filter box dynamically based on category
+                if(activeCat === 'Clothes') {
+                    sizeFilterGroup.style.display = 'block';
+                } else {
+                    sizeFilterGroup.style.display = 'none';
+                    // Reset size if hiding
+                    filterSizeInputs[0].checked = true;
+                }
+
+                const filtered = rawData.filter(item => {
+                    const matchLoc = !locSearch || item.location.toLowerCase().includes(locSearch);
+                    const matchCat = activeCat === 'All' || item.category === activeCat;
+                    const matchCond = activeCond === 'All' || item.condition === activeCond;
+                    
+                    let matchSize = true;
+                    if(activeCat === 'Clothes' && activeSize !== 'All') {
+                        matchSize = item.size === activeSize;
+                    }
+
+                    return matchLoc && matchCat && matchCond && matchSize;
+                });
+
+                // Clear Grid
+                grid.innerHTML = '';
+
+                if(filtered.length === 0) {
+                    emptyState.classList.remove('d-none');
+                    resultsCount.innerText = "0 Items Found";
+                } else {
+                    emptyState.classList.add('d-none');
+                    resultsCount.innerText = `${filtered.length} Item${filtered.length > 1 ? 's' : ''} Available`;
+
+                    filtered.forEach((item, index) => {
+                        const conditionClass = item.condition === 'New' ? 'cond-new' : 'cond-used';
+                        const timeAgo = formatTimeAgo(new Date(item.datePosted));
+                        const delay = (index % 6) * 0.1;
+
+                        const html = `
+                            <div class="col-md-6 col-xl-4 reveal-up" style="transition-delay: ${delay}s; opacity:1; visibility:visible; transform:none;">
+                                <div class="donation-card">
+                                    <div class="image-container">
+                                        <div class="category-badge"><i class="bi bi-tag-fill me-1"></i> ${item.category}</div>
+                                        <div class="condition-badge ${conditionClass}">${item.condition}</div>
+                                        <img src="${item.image}" alt="${item.itemName}">
+                                    </div>
+                                    <div class="card-inner-body">
+                                        <h3 class="item-title">${item.itemName}</h3>
+                                        
+                                        <div class="donor-box">
+                                            <div class="donor-avatar">${item.donorName.charAt(0).toUpperCase()}</div>
+                                            <div>
+                                                <h5 class="donor-name">${item.donorName}</h5>
+                                                <small class="text-muted">${timeAgo}</small>
+                                            </div>
+                                        </div>
+
+                                        <ul class="meta-list">
+                                            <li><i class="bi bi-box-seam"></i> <strong>Quantity:</strong> ${item.quantity}</li>
+                                            ${item.size ? `<li><i class="bi bi-rulers"></i> <strong>Size:</strong> ${item.size}</li>` : ''}
+                                            <li><i class="bi bi-geo-alt"></i> ${item.location}</li>
+                                        </ul>
+
+                                        <button class="btn btn-outline-custom w-100 mt-auto" onclick="openContact('${item.id}')">
+                                            <i class="bi bi-chat-dots-fill me-2"></i> Contact Provider
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        grid.insertAdjacentHTML('beforeend', html);
+                    });
+                }
+            };
+
+            // Helpers
+            function formatTimeAgo(date) {
+                const seconds = Math.floor((new Date() - date) / 1000);
+                if(seconds < 60) return "Just now";
+                const minutes = Math.floor(seconds / 60);
+                if(minutes < 60) return `${minutes}m ago`;
+                const hours = Math.floor(minutes / 60);
+                if(hours < 24) return `${hours}h ago`;
+                const days = Math.floor(hours / 24);
+                return `${days}d ago`;
+            }
+
+            // Event Listeners for Filters
+            searchLoc.addEventListener('input', renderCards);
+            
+            [...filterCatInputs, ...filterCondInputs, ...filterSizeInputs].forEach(input => {
+                input.addEventListener('change', renderCards);
+            });
+
+            resetBtn.addEventListener('click', () => {
+                searchLoc.value = '';
+                filterCatInputs[0].checked = true;
+                filterCondInputs[0].checked = true;
+                filterSizeInputs[0].checked = true;
+                renderCards();
+            });
+
+            // Initial render
+            renderCards();
+        });
+    </script>
+</body>
+</html>

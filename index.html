@@ -4,117 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sustainify - Smart Food Donation Platform</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <title>Sustainify - Community Donation Platform</title>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
-        :root {
-            --primary: #2fac66;
-            /* Fresh Green */
-            --primary-dark: #1e7a46;
-            --secondary: #f4a261;
-            /* Warm Orange/Food */
-            --dark: #2b2d42;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            display: flex;
-            flex-direction: column;
+        /* Homepage specific styles */
+        .hero-section {
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Navbar */
-        .navbar {
-            backdrop-filter: blur(15px);
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand {
-            font-weight: 800;
-            color: var(--primary) !important;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            color: var(--dark);
-            transition: color 0.3s;
+            background: linear-gradient(135deg, var(--light) 0%, #eef2ff 100%);
             position: relative;
+            overflow: hidden;
+            padding-top: 80px;
         }
 
-        .nav-link::after {
-            content: '';
+        .hero-bg-shapes {
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--primary);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .nav-link.active {
-            color: var(--primary) !important;
-        }
-
-        .btn-donate-nav {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white !important;
-            border-radius: 25px;
-            padding: 8px 24px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(47, 172, 102, 0.3);
-        }
-
-        .btn-donate-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(47, 172, 102, 0.4);
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 120px 0 80px;
-            background: linear-gradient(135deg, #e8f5e9 0%, #fefcfb 100%);
-            position: relative;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .shape-1 {
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(47, 172, 102, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            top: -10%; right: -5%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
             border-radius: 50%;
-            z-index: 0;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .shape-2 {
+            position: absolute;
+            bottom: -15%; left: -5%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(225, 29, 72, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         .hero-content {
@@ -123,330 +63,273 @@
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--dark), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
         }
 
-        .hero-image {
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s ease;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--dark-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
 
-        .hero-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-
-        /* Utils */
-        .section-title {
-            font-weight: 800;
-            margin-bottom: 40px;
+        .hero-image-wrapper {
             position: relative;
-            display: inline-block;
+            z-index: 1;
         }
 
-        .section-title::after {
+        .hero-img {
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            border: 8px solid white;
+        }
+
+        /* Category Cards */
+        .category-card {
+            text-align: center;
+            padding: 40px 20px;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .category-icon {
+            width: 80px; 
+            height: 80px;
+            border-radius: 20px;
+            background: var(--light-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            transition: var(--transition-normal);
+        }
+
+        .category-card:hover .category-icon {
+            background: var(--grad-primary);
+            color: white;
+            box-shadow: var(--shadow-glow);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--dark);
+            color: white;
+            position: relative;
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .stats-section::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 2px;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1593113565214-80afcb4a45d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
         }
 
-        .section-title.text-center::after {
-            left: 50%;
-            transform: translateX(-50%);
+        .stat-item {
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
 
-        .img-radius {
-            border-radius: 20px;
-        }
-
-        .shadow-soft {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        .counter-val {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--grad-accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         /* How it works */
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            background: #fff;
+        .step-wrapper {
+            position: relative;
+        }
+
+        .step-wrapper:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: dashed 2px var(--primary-light);
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .step-wrapper::after { display: none; }
+            .hero-title { font-size: 2.5rem; }
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
+            background: white;
+            box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            font-weight: 800;
             color: var(--primary);
             margin: 0 auto 20px;
-            box-shadow: 0 10px 20px rgba(47, 172, 102, 0.15);
-            position: relative;
-            z-index: 2;
-        }
-
-        .step-card {
-            background: #fff;
-            padding: 40px 20px;
-            border-radius: 20px;
-            height: 100%;
-            position: relative;
-        }
-
-        /* Statistics */
-        .stats-section {
-            background: linear-gradient(135deg, var(--dark), #1a1b26);
-            color: white;
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 10px 0;
-        }
-
-        /* CTA */
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 30px;
-            padding: 60px;
-            color: white;
-            text-align: center;
-            margin: 80px auto;
-            max-width: 1000px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1593113565214-80afcb4a45d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover;
-            opacity: 0.1;
-            mix-blend-mode: overlay;
-        }
-
-        .cta-content {
             position: relative;
             z-index: 1;
+            transition: var(--transition-normal);
         }
 
-        /* Footer */
-        .footer {
-            background-color: var(--dark);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 60px 0 20px;
-            margin-top: auto;
-        }
-
-        .footer-brand {
-            font-size: 1.5rem;
-            font-weight: 800;
+        .step-wrapper:hover .step-number {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+            background: var(--primary);
             color: white;
+        }
+
+        /* SDG Cards */
+        .sdg-card {
+            border: none;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .sdg-img {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
             margin-bottom: 20px;
-            display: inline-block;
         }
 
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 40px 0 20px;
-            padding-top: 20px;
+        .sdg-card:hover .sdg-img {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner-pulse"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="bi bi-box2-heart-fill fs-3"></i> Sustainify
+                <i class="bi bi-heart-fill"></i> Sustainify
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-dark"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto gap-4">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="food-list.html">Available Food</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sdg.html">SDGs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
+                <ul class="navbar-nav mx-auto gap-3">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="donations-list.html">Available Donations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
-                <div class="d-flex">
-                    <a href="donate.html" class="btn btn-donate-nav nav-link">Donate Food</a>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <a href="donate.html" class="btn btn-primary-custom w-100">Donate Now</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero d-flex align-items-center">
+    <section class="hero-section">
+        <div class="hero-bg-shapes">
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+        </div>
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6 hero-content">
-                    <span class="badge bg-success bg-opacity-10 text-success mb-3 px-3 py-2 rounded-pill fw-semibold">
-                        <i class="bi bi-globe-americas me-1"></i> Supporting Global Goals
+                <div class="col-lg-6 hero-content reveal-left">
+                    <span class="badge bg-white text-primary shadow-sm px-3 py-2 rounded-pill mb-4 border border-primary-subtle">
+                        <i class="bi bi-stars"></i> Empowering Communities Together
                     </span>
-                    <h1 class="hero-title">Smart Food Donation Platform</h1>
-                    <p class="lead text-muted mb-4">
-                        Sustainify connects food donors with people and organizations in need.
-                        Our mission is to reduce food waste and support communities through responsible food sharing.
+                    <h1 class="hero-title">
+                        Share your <span class="text-gradient">resources,</span><br>
+                        uplift a <span class="text-gradient">community.</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Sustainify is a modern social impact platform connecting donors with individuals and organizations in need. Donate clothes, books, household items, and more to create a sustainable future.
                     </p>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="donate.html" class="btn btn-donate-nav px-4 py-3 fs-5">
-                            Donate Food <i class="bi bi-arrow-right ms-2"></i>
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="donate.html" class="btn btn-primary-custom fs-5 px-4 py-3">
+                            Start Donating <i class="bi bi-arrow-right ms-2"></i>
                         </a>
-                        <a href="food-list.html" class="btn btn-outline-dark rounded-pill px-4 py-3 fs-5 hover-lift">
-                            View Available Food
+                        <a href="donations-list.html" class="btn btn-outline-custom fs-5 px-4 py-3">
+                            Explore Donations
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Community sharing food" class="img-fluid hero-image w-100 object-fit-cover"
-                        style="height: 500px;">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What is Sustainify -->
-    <section class="py-5 my-5">
-        <div class="container">
-            <div class="row align-items-center g-5 flex-lg-row-reverse">
-                <div class="col-lg-6">
-                    <h2 class="section-title">What is Sustainify?</h2>
-                    <p class="fs-5 text-muted">
-                        Sustainify is an intelligent bridge between excess food and true need. Whether you're a
-                        restaurant with surplus meals after closing, or an NGO helping the community, our platform
-                        connects you seamlessly.
-                    </p>
-                    <p class="fs-5 text-muted">
-                        We leverage local connectivity to ensure fresh, usable food doesn't end up in landfills but
-                        instead reaches those who can benefit from it, promoting a circular and compassionate economy.
-                    </p>
-                </div>
-                <div class="col-lg-6">
-                    <div class="position-relative hover-lift">
-                        <img src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Food boxes" class="img-fluid img-radius shadow-soft">
+                <div class="col-lg-6 hero-image-wrapper reveal-right">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Happy Community Sharing" class="img-fluid hero-img">
+                        
+                        <!-- Floating Card -->
+                        <div class="glass-card position-absolute bottom-0 start-0 translate-middle pointer-events-none p-3 shadow-lg" style="margin-left: 20%; margin-bottom: -10%;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="bi bi-check-lg fs-3"></i>
+                                </div>
+                                <div>
+                                    <p class="mb-0 fw-bold fs-5">400+ Families</p>
+                                    <small class="text-muted">Helped this month</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why We Are Doing This -->
-    <section class="py-5 bg-white">
+    <!-- What is Sustainify & Why it matters -->
+    <section class="section-padding bg-white">
         <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <h2 class="section-title">Why We Are Doing This</h2>
-                    <ul class="list-unstyled mt-4">
-                        <li class="d-flex align-items-start mb-4 hover-lift p-3 rounded-4 bg-light">
-                            <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
-                            <div>
-                                <h4 class="fw-bold mb-1">Massive Food Waste</h4>
-                                <p class="text-muted mb-0">Tons of edible food are discarded daily while perfectly safe
-                                    for consumption.</p>
-                            </div>
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-6 reveal-left">
+                    <h2 class="display-5 fw-bold mb-4">What is <span class="text-gradient">Sustainify?</span></h2>
+                    <p class="fs-5 text-muted mb-4">
+                        We are a centralized hub designed to reduce waste and fight poverty simultaneously. Often, items that sit unused in our homes—like jackets, toys, laptops, or books—can be life-changing for someone else. 
+                    </p>
+                    <p class="fs-5 text-muted mb-4">
+                        Sustainify allows individuals and NGOs to post or request items. From everyday clothes to school supplies, we make charitable giving transparent, direct, and incredibly easy.
+                    </p>
+                    <ul class="list-unstyled mt-5">
+                        <li class="d-flex align-items-center gap-3 mb-3 fs-5 fw-medium">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i> Free coordination platform
                         </li>
-                        <li class="d-flex align-items-start mb-4 hover-lift p-3 rounded-4 bg-light">
-                            <i class="bi bi-people-fill text-danger fs-3 me-3"></i>
-                            <div>
-                                <h4 class="fw-bold mb-1">Rising Hunger</h4>
-                                <p class="text-muted mb-0">Millions struggle to afford daily meals, creating a stark
-                                    contrast to the waste.</p>
-                            </div>
+                        <li class="d-flex align-items-center gap-3 mb-3 fs-5 fw-medium">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i> Support for multiple item categories
                         </li>
-                        <li class="d-flex align-items-start hover-lift p-3 rounded-4 bg-light">
-                            <i class="bi bi-diagram-3-fill text-primary fs-3 me-3"></i>
-                            <div>
-                                <h4 class="fw-bold mb-1">Lack of Coordination</h4>
-                                <p class="text-muted mb-0">Donors want to help, but lack a clear, fast way to reach
-                                    recipients before food spoils.</p>
-                            </div>
+                        <li class="d-flex align-items-center gap-3 fs-5 fw-medium">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i> Direct point-to-point donation
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 reveal-right">
                     <div class="row g-3">
                         <div class="col-6">
-                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                                alt="Support" class="img-fluid img-radius shadow-soft hover-lift mt-5">
+                            <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Volunteers" class="img-fluid rounded-4 shadow-sm mb-3">
+                            <img src="https://images.unsplash.com/photo-1517673132405-a56a62b18caf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Books Donation" class="img-fluid rounded-4 shadow-sm">
                         </div>
-                        <div class="col-6">
-                            <img src="https://communitysolidarity.org/sites/all/files/hempstead_food_share_banner2.png"
-                                alt="Community" class="img-fluid img-radius shadow-soft hover-lift">
+                        <div class="col-6 pt-5">
+                            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="People gathering" class="img-fluid rounded-4 shadow-sm mb-3">
                         </div>
                     </div>
                 </div>
@@ -454,254 +337,223 @@
         </div>
     </section>
 
-    <!-- How it works -->
-    <section class="py-5 my-5 bg-light">
+    <!-- Donation Categories -->
+    <section class="section-padding bg-light">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title text-center">How It Works</h2>
-                <p class="text-muted fs-5 mt-3">Three simple steps to make a huge difference.</p>
+            <div class="text-center mb-5 reveal-up">
+                <h2 class="display-5 fw-bold mb-3">What You Can <span class="text-gradient">Donate</span></h2>
+                <p class="fs-5 text-muted max-w-700 mx-auto" style="max-width: 700px;">
+                    We accept a wide variety of essential items to help build stronger, happier communities. Discover the areas where you can make an impact.
+                </p>
             </div>
-            <div class="row g-4 position-relative">
-                <!-- Connect line removed intentionally -->
 
-                <div class="col-md-4 text-center">
-                    <div class="step-card shadow-soft hover-lift">
-                        <div class="step-icon">
-                            <i class="bi bi-bag-heart"></i>
-                        </div>
-                        <h4 class="fw-bold">Step 1: Donate Food</h4>
-                        <p class="text-muted">Post details of your surplus food, including location and expiry time.</p>
+            <div class="row g-4 justify-content-center">
+                <!-- Category 1 -->
+                <div class="col-xl-4 col-md-6 reveal-up" style="transition-delay: 0.1s;">
+                    <div class="glass-card category-card">
+                        <div class="category-icon"><i class="bi bi-bag-heart-fill"></i></div>
+                        <h4 class="fw-bold mb-3">Clothes</h4>
+                        <p class="text-muted">Warm jackets, gently used shoes, and everyday wear for men, women, and children.</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <div class="step-card shadow-soft hover-lift">
-                        <div class="step-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <h4 class="fw-bold">Step 2: Find Donations</h4>
-                        <p class="text-muted">NGOs or individuals browse available fresh food in their local area.</p>
+                <!-- Category 2 -->
+                <div class="col-xl-4 col-md-6 reveal-up" style="transition-delay: 0.2s;">
+                    <div class="glass-card category-card">
+                        <div class="category-icon"><i class="bi bi-book-half"></i></div>
+                        <h4 class="fw-bold mb-3">Books</h4>
+                        <p class="text-muted">Textbooks, novels, and children's literature to foster education and imagination.</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <div class="step-card shadow-soft hover-lift">
-                        <div class="step-icon">
-                            <i class="bi bi-truck"></i>
-                        </div>
-                        <h4 class="fw-bold">Step 3: Collect Food</h4>
-                        <p class="text-muted">Food is secured and collected directly from the donor before it expires.
-                        </p>
+                <!-- Category 3 -->
+                <div class="col-xl-4 col-md-6 reveal-up" style="transition-delay: 0.3s;">
+                    <div class="glass-card category-card">
+                        <div class="category-icon"><i class="bi bi-puzzle-fill"></i></div>
+                        <h4 class="fw-bold mb-3">Toys</h4>
+                        <p class="text-muted">Bring a smile to a child's face with board games, action figures, and educational toys.</p>
                     </div>
+                </div>
+                <!-- Category 4 -->
+                <div class="col-xl-4 col-md-6 reveal-up" style="transition-delay: 0.4s;">
+                    <div class="glass-card category-card">
+                        <div class="category-icon"><i class="bi bi-pencil-fill"></i></div>
+                        <h4 class="fw-bold mb-3">School Supplies</h4>
+                        <p class="text-muted">Notebooks, backpacks, geometry boxes, and pens for students in need.</p>
+                    </div>
+                </div>
+                <!-- Category 5 -->
+                <div class="col-xl-4 col-md-6 reveal-up" style="transition-delay: 0.5s;">
+                    <div class="glass-card category-card">
+                        <div class="category-icon"><i class="bi bi-house-heart-fill"></i></div>
+                        <h4 class="fw-bold mb-3">Household Items</h4>
+                        <p class="text-muted">Utensils, blankets, small appliances, and furniture to help families build a home.</p>
+                    </div>
+                </div>
+                <!-- Category 6 -->
+                <div class="col-xl-4 col-md-6 reveal-up" style="transition-delay: 0.6s;">
+                    <div class="glass-card category-card">
+                        <div class="category-icon"><i class="bi bi-piggy-bank-fill"></i></div>
+                        <h4 class="fw-bold mb-3">Money Donations</h4>
+                        <p class="text-muted">Financial support to procure specific high-demand necessities safely.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="text-center mb-5 reveal-up">
+                <h2 class="display-5 fw-bold mb-3">How It <span class="text-gradient">Works</span></h2>
+                <p class="fs-5 text-muted">A seamless, transparent process from donor to receiver.</p>
+            </div>
+
+            <div class="row g-4 text-center mt-5">
+                <div class="col-md-4 step-wrapper reveal-up" style="transition-delay: 0.1s;">
+                    <div class="step-number">1</div>
+                    <h4 class="fw-bold mb-3">Post Items</h4>
+                    <p class="text-muted px-4">Upload a photo, detail the condition, and list the item you wish to donate.</p>
+                </div>
+                <div class="col-md-4 step-wrapper reveal-up" style="transition-delay: 0.2s;">
+                    <div class="step-number">2</div>
+                    <h4 class="fw-bold mb-3">Community Connects</h4>
+                    <p class="text-muted px-4">NGOs or verified individuals browse the listings and request necessary items.</p>
+                </div>
+                <div class="col-md-4 step-wrapper reveal-up" style="transition-delay: 0.3s;">
+                    <div class="step-number"><i class="bi bi-box2-heart-fill"></i></div>
+                    <h4 class="fw-bold mb-3">Create Impact</h4>
+                    <p class="text-muted px-4">Items are handed over or shipped, extending their lifecycle and helping someone directly.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Statistics Section -->
-    <section class="stats-section">
+    <section class="stats-section reveal">
         <div class="container">
-            <div class="row g-4 text-center">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="stat-card hover-lift">
-                        <i class="bi bi-box2-heart fs-1 text-primary"></i>
-                        <div class="stat-number" data-target="120">0</div>
-                        <div class="fs-5">Donations Posted</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="stat-card hover-lift">
-                        <i class="bi bi-basket fs-1 text-primary"></i>
-                        <div class="stat-number" data-target="350">0</div>
-                        <div class="fs-5">Meals Saved</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="stat-card hover-lift">
-                        <i class="bi bi-person-hearts fs-1 text-primary"></i>
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="fs-5">Active Donors</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="stat-card hover-lift">
-                        <i class="bi bi-geo-alt fs-1 text-primary"></i>
-                        <div class="stat-number" data-target="10">0</div>
-                        <div class="fs-5">Cities Covered</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SDG Highlight Section -->
-    <section class="py-5 my-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title text-center">Supporting SDGs</h2>
-                <p class="text-muted fs-5 mt-3">Our platform aims to directly contribute to the United Nations
-                    Sustainable Development Goals.</p>
-            </div>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 hover-lift text-center p-4">
-                        <div class="mb-3">
-                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-02.jpg"
-                                alt="SDG 2 Zero Hunger" class="img-fluid rounded-3 shadow-sm" style="width: 120px;">
-                        </div>
-                        <h4 class="fw-bold">Zero Hunger</h4>
-                        <p class="text-muted">Redirecting surplus food to those in need, fighting local hunger directly.
-                        </p>
-                    </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="counter-val" data-target="250">0</div>
+                    <div class="fs-5 mt-2 opacity-75">Donations Posted</div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 hover-lift text-center p-4">
-                        <div class="mb-3">
-                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-11.jpg"
-                                alt="SDG 11 Sustainable Cities" class="img-fluid rounded-3 shadow-sm"
-                                style="width: 120px;">
-                        </div>
-                        <h4 class="fw-bold">Sustainable Cities</h4>
-                        <p class="text-muted">Building resilient urban communities through shared resources and
-                            solidarity.</p>
-                    </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="counter-val" data-target="120">0</div>
+                    <div class="fs-5 mt-2 opacity-75">Active Contributors</div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 hover-lift text-center p-4">
-                        <div class="mb-3">
-                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-12.jpg"
-                                alt="SDG 12 Responsible Consumption" class="img-fluid rounded-3 shadow-sm"
-                                style="width: 120px;">
-                        </div>
-                        <h4 class="fw-bold">Responsible Consumption</h4>
-                        <p class="text-muted">Halving food waste at retail and consumer levels, supporting a circular
-                            economy.</p>
-                    </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="counter-val" data-target="400">0</div>
+                    <div class="fs-5 mt-2 opacity-75">Families Helped</div>
                 </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="sdg.html" class="btn btn-outline-primary rounded-pill px-4">Learn more about our SDGs
-                    impact</a>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="counter-val" data-target="20">0</div>
+                    <div class="fs-5 mt-2 opacity-75">Cities Connected</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to action -->
-    <div class="container pb-5">
-        <div class="cta-section shadow-soft hover-lift">
-            <div class="cta-content">
-                <h2 class="fw-bold mb-3">Have Extra Food?</h2>
-                <p class="fs-5 mb-4 opacity-75">Join our network of donors and make an immediate impact in someone's
-                    life today.</p>
-                <a href="donate.html"
-                    class="btn btn-light text-success fw-bold rounded-pill px-5 py-3 fs-5 hover-zoom shadow">
-                    Donate Food Now
-                </a>
+    <!-- SDG Highlights -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5 reveal-up">
+                <h2 class="display-5 fw-bold mb-3">Supporting Global <span class="text-gradient">Goals</span></h2>
+                <p class="fs-5 text-muted max-w-700 mx-auto" style="max-width: 700px;">
+                    Every donation contributes significantly to the United Nations Sustainable Development Goals.
+                </p>
+            </div>
+
+            <div class="row g-5 mt-4">
+                <div class="col-md-6 col-lg-3 reveal-up" style="transition-delay: 0.1s;">
+                    <div class="sdg-card text-center">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-01.jpg" alt="No Poverty" class="img-fluid sdg-img">
+                        <h4 class="fw-bold">No Poverty</h4>
+                        <p class="text-muted">Helping people access essential items they cannot afford.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal-up" style="transition-delay: 0.2s;">
+                    <div class="sdg-card text-center">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-04.jpg" alt="Quality Education" class="img-fluid sdg-img">
+                        <h4 class="fw-bold">Quality Education</h4>
+                        <p class="text-muted">Donating books and school supplies to empower students.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal-up" style="transition-delay: 0.3s;">
+                    <div class="sdg-card text-center">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-10.jpg" alt="Reduced Inequalities" class="img-fluid sdg-img">
+                        <h4 class="fw-bold">Reduced Inequalities</h4>
+                        <p class="text-muted">Supporting disadvantaged communities with critical resources.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal-up" style="transition-delay: 0.4s;">
+                    <div class="sdg-card text-center">
+                        <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-12.jpg" alt="Responsible Consumption" class="img-fluid sdg-img">
+                        <h4 class="fw-bold">Responsible Consumption</h4>
+                        <p class="text-muted">Encouraging reuse and recycling instead of sending goods to landfills.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer-modern">
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-5 mb-5">
                 <div class="col-lg-4">
-                    <a href="index.html" class="footer-brand text-decoration-none">
-                        <i class="bi bi-box2-heart-fill text-success"></i> Sustainify
+                    <a href="index.html" class="navbar-brand text-white footer-brand mb-3">
+                        <i class="bi bi-heart-fill"></i> Sustainify
                     </a>
-                    <p class="text-white-50 mb-4 pe-lg-4">
-                        Helping reduce food waste and support communities through responsible food sharing. Together we
-                        can make a difference.
+                    <p class="mt-4 pe-lg-4">
+                        A modern social impact platform dedicated to bridging the gap between excess resources and community needs. Donate today, change a life tomorrow.
                     </p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-white-50 fs-4 hover-zoom"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white-50 fs-4 hover-zoom"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="text-white-50 fs-4 hover-zoom"><i class="bi bi-instagram"></i></a>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="social-circle"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <h5 class="text-white mb-3 fw-bold">Quick Links</h5>
-                    <ul class="footer-links">
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="donate.html">Donate Food</a></li>
-                        <li><a href="food-list.html">Available Food</a></li>
-                        <li><a href="sdg.html">Sustainable Development Goals</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="donations-list.html">Available Items</a></li>
+                        <li><a href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="sdg.html">Our Impact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <h5 class="text-white mb-3 fw-bold">SDG Reference</h5>
-                    <p class="text-white-50">
-                        This platform directly supports the UN's SDGs:
-                    </p>
-                    <div class="d-flex gap-2 mb-3 flex-wrap">
-                        <span class="badge bg-secondary text-white">SDG 2</span>
-                        <span class="badge bg-secondary text-white">SDG 11</span>
-                        <span class="badge bg-secondary text-white">SDG 12</span>
+                    <h5 class="text-white fw-bold mb-4">SDG Alignment</h5>
+                    <p>We actively support the UN Sustainable Development Goals.</p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-primary">SDG 1</span>
+                        <span class="badge bg-danger">SDG 4</span>
+                        <span class="badge bg-warning text-dark">SDG 10</span>
+                        <span class="badge bg-success">SDG 12</span>
                     </div>
                 </div>
             </div>
-            <div class="footer-divider text-center text-white-50">
-                <p class="mb-0">© 2026 Sustainify – Smart Food Donation Platform. All rights reserved.</p>
+            
+            <div class="pt-4 border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+                <div class="text-center">
+                    <p class="mb-0">© 2026 Sustainify. Built for the community, by the community.</p>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Navbar Active State
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Animated Counters
-            const counters = document.querySelectorAll('.stat-number');
-            const speed = 200; // The lower the slower
-
-            const animateCounters = () => {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-
-                    const updateCount = () => {
-                        const inc = target / speed;
-                        if (count < target) {
-                            counter.innerText = Math.ceil(parseInt(counter.innerText) + inc);
-                            setTimeout(updateCount, 10);
-                        } else {
-                            counter.innerText = target + "+";
-                        }
-                    };
-                    updateCount();
-                });
-            }
-
-            // Intersection Observer for animations
-            const observerOptions = {
-                threshold: 0.5
-            };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounters();
-                        observer.disconnect(); // Run once
-                    }
-                });
-            }, observerOptions);
-
-            const statsSection = document.querySelector('.stats-section');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-        });
-    </script>
+    <!-- Custom Main JS -->
+    <script src="assets/js/main.js"></script>
 </body>
-
 </html>

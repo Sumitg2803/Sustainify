@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Sustainify</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .page-header {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1e3a8a 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-bg-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse-glow 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .policy-container {
+            max-width: 900px;
+            margin: -50px auto 50px;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--light-muted);
+        }
+
+        .policy-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .policy-heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .policy-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .policy-text {
+            color: var(--dark-muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .policy-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .policy-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            color: var(--dark-muted);
+            line-height: 1.6;
+        }
+
+        .policy-list li::before {
+            content: '\F26A'; /* bootstrap icon bi-check-circle-fill hex */
+            font-family: 'bootstrap-icons';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--success);
+        }
+        
+        .last-updated {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 20px;
+            display: inline-block;
+            background: rgba(0,0,0,0.2);
+            padding: 5px 15px;
+            border-radius: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .policy-container {
+                padding: 30px 20px;
+                margin-top: -30px;
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner-pulse"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-fill"></i> Sustainify
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="donations-list.html">Available Donations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sdg.html">SDGs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <a href="donate.html" class="btn btn-primary-custom w-100">Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="header-bg-glow"></div>
+        <div class="container position-relative z-1">
+            <h1 class="display-4 fw-bold reveal-up">Privacy <span class="text-gradient">Policy</span></h1>
+            <p class="fs-5 opacity-75 max-w-700 mx-auto mt-3 reveal-up" style="max-width: 700px; transition-delay: 0.1s;">
+                Sustainify respects your privacy and is committed to protecting the personal information you share with us to help communities.
+            </p>
+            <div class="last-updated reveal-up" style="transition-delay: 0.2s;">
+                <i class="bi bi-calendar3 me-2"></i> Last Updated: March 2026
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="container pb-5 mb-5">
+        <div class="policy-container reveal-up" style="transition-delay: 0.3s;">
+            
+            <div class="text-center mb-5 pb-3">
+                <h3 class="fw-bold text-dark">How We Handle Your Information</h3>
+                <p class="text-muted">Please read these terms carefully to understand our practices regarding your personal data.</p>
+            </div>
+
+            <!-- Section 1 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-info-circle-fill"></i></div>
+                    1. Introduction
+                </h4>
+                <div class="policy-text">
+                    <p>Welcome to Sustainify ("we," "our," or "us"). We are committed to protecting your privacy while you use our community donation platform. Sustainify is designed to connect generous individuals and organizations with those in need by facilitating the donation of clothes, books, toys, and other essential items.</p>
+                    <p>This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. Maintaining your trust is our top priority, and we only collect what is strictly necessary to make the donation process seamless and effective for the communities we serve.</p>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-person-lines-fill"></i></div>
+                    2. Information We Collect
+                </h4>
+                <div class="policy-text">
+                    <p>When you interact with the Sustainify platform—particularly when using our donation features or contacting us—we may ask you to provide certain personal information. The types of data we may collect include:</p>
+                    <ul class="policy-list">
+                        <li>Your full name (or organization name)</li>
+                        <li>Email address</li>
+                        <li>Phone number</li>
+                        <li>Geographic location (city or pickup area)</li>
+                        <li>Specific details about the donation items (category, condition, size, quantity)</li>
+                        <li>Images or photographs uploaded to represent your donation</li>
+                    </ul>
+                    <p>We specifically gather this information solely to facilitate the listing of your donations and to enable efficient communication between donors and prospective recipients.</p>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-gear-fill"></i></div>
+                    3. How We Use Information
+                </h4>
+                <div class="policy-text">
+                    <p>The information we collect is utilized strictly to provide, maintain, and improve our community services. We may use your personal information for the following purposes:</p>
+                    <ul class="policy-list">
+                        <li>Creating and managing public donation listings on the "Available Donations" board.</li>
+                        <li>Connecting contributors with recipients or partner non-governmental organizations (NGOs).</li>
+                        <li>Sending you administrative messages, such as confirmation of your submitted donations.</li>
+                        <li>Improving the platform's functionality, UI/UX, and overall user experience.</li>
+                        <li>Responding to your inquiries, support requests, and feedback submitted via our Contact page.</li>
+                        <li>Featuring you on the "Wall of Kindness" to recognize your contributions (with your implicit or explicit consent).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-shield-lock-fill"></i></div>
+                    4. Data Storage and Security
+                </h4>
+                <div class="policy-text">
+                    <p>We take the security of your personal information seriously. Sustainify implements a variety of reasonable administrative, technical, and physical security measures to protect your personal data from unauthorized access, use, alteration, or disclosure.</p>
+                    <p>Our platform simulates local environments utilizing modern browser technologies like LocalStorage to process your data without exposing it to vulnerable external databases where unnecessary. While we prioritize the secure handling of your data, please remember that no method of transmission over the internet, or method of electronic storage, is 100% secure. We cannot guarantee absolute security but strive to use commercially acceptable means to protect your personal information.</p>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-share-fill"></i></div>
+                    5. Sharing of Information
+                </h4>
+                <div class="policy-text">
+                    <p><strong>We do not sell, rent, or trade your personal information to third parties for marketing purposes.</strong></p>
+                    <p>Information is only shared under the following limited circumstances necessary to fulfill the mission of Sustainify:</p>
+                    <ul class="policy-list">
+                        <li><strong>Public Listings:</strong> Information you voluntarily include in your donation submission (such as location and item descriptions) is shared publicly to allow users in need to view and request the items.</li>
+                        <li><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating our website, conducting our operations, or servicing you, so long as those parties agree to keep this information confidential.</li>
+                        <li><strong>Legal Obligations:</strong> We may disclose information if required to do so by law or in the good faith belief that such action is necessary to comply with legal obligations or protect the rights and safety of Sustainify and our users.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-person-check-fill"></i></div>
+                    6. User Rights and Choices
+                </h4>
+                <div class="policy-text">
+                    <p>We believe in empowering you with control over your own data. Because our platform is community-driven, you retain specific rights regarding your information. At any time, users may:</p>
+                    <ul class="policy-list">
+                        <li>Request the immediate removal or modification of active donation listings.</li>
+                        <li>Request the deletion of their personal data from our active simulated servers.</li>
+                        <li>Update or correct inaccurate personal information regarding contact details or organization identity.</li>
+                        <li>Opt-out of future communications or being featured on the public Wall of Kindness.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-cookie"></i></div>
+                    7. Cookies and Website Analytics
+                </h4>
+                <div class="policy-text">
+                    <p>Sustainify may utilize basic website technologies, such as cookies, web beacons, and local browser storage, to enhance and personalize your user experience.</p>
+                    <p>These technologies allow the website to remember your actions and preferences over time so you do not have to keep re-entering them whenever you come back to the site or browse from one page to another. We may also use non-identifiable analytics to understand how users interact with our platform (e.g., tracking the most visited SDGs or filtering habits) to continuously improve the interface and features.</p>
+                </div>
+            </div>
+
+            <!-- Section 8 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-link-45deg"></i></div>
+                    8. Third-Party Links
+                </h4>
+                <div class="policy-text">
+                    <p>Our platform may contain links to external resources, websites, and plugins that are not operated by us (for example, linking to official United Nations SDG websites). If you click on a third-party link, you will be directed to that third party's site.</p>
+                    <p>We strongly advise you to review the Privacy Policy of every site you visit. Sustainify has no control over and assumes no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
+                </div>
+            </div>
+
+            <!-- Section 9 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-emoji-smile-fill"></i></div>
+                    9. Children's Privacy
+                </h4>
+                <div class="policy-text">
+                    <p>Sustainify's services are built for adults, organizations, and families. Our platform is not intended for unsupervised use by minors under the age of 13.</p>
+                    <p>We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal information without your consent, please contact us so that we will be able to take necessary actions to remove that information from our servers.</p>
+                </div>
+            </div>
+
+            <!-- Section 10 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-arrow-repeat"></i></div>
+                    10. Updates to Privacy Policy
+                </h4>
+                <div class="policy-text">
+                    <p>We reserve the right to update this Privacy Policy periodically to reflect changes in our practices, technology, or legal requirements. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date prominently at the top of the header.</p>
+                    <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                </div>
+            </div>
+
+            <!-- Section 11 -->
+            <div class="policy-section">
+                <h4 class="policy-heading">
+                    <div class="policy-icon"><i class="bi bi-envelope-at-fill"></i></div>
+                    11. Contact Information
+                </h4>
+                <div class="policy-text">
+                    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data handling practices, we are here to help. You can contact our dedicated privacy team through the following channels:</p>
+                    <div class="bg-light p-4 rounded mt-3">
+                        <p class="mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> <strong>Email:</strong> privacy@sustainify.org</p>
+                        <p class="mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> <strong>Address:</strong> 123 Impact Avenue, Silicon Valley, CA 94025</p>
+                        <p class="mb-0"><i class="bi bi-telephone-fill text-primary me-2"></i> <strong>Phone:</strong> +1 (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <a href="index.html" class="navbar-brand text-white footer-brand mb-3">
+                        <i class="bi bi-heart-fill"></i> Sustainify
+                    </a>
+                    <p class="mt-4 pe-lg-4">
+                        A modern social impact platform dedicated to bridging the gap between excess resources and community needs. Donate today, change a life tomorrow.
+                    </p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="social-circle"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="donations-list.html">Available Items</a></li>
+                        <li><a href="wall-of-kindness.html">Wall of Kindness</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sdg.html">Our Impact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white fw-bold mb-4">SDG Alignment</h5>
+                    <p>We actively support the UN Sustainable Development Goals.</p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-primary">SDG 1</span>
+                        <span class="badge bg-danger">SDG 4</span>
+                        <span class="badge bg-warning text-dark">SDG 10</span>
+                        <span class="badge bg-success">SDG 12</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+                <div class="text-center">
+                    <p class="mb-0">© 2026 Sustainify. Built for the community, by the community.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Main JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
